@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="content"> 
+    <h4> Score: <span class="score"></span></h4>
+    <img src="dice.png" class="btn">
+    <div class="boxs firstBox" style="margin-left: 20px;">
+    </div>
+    <div class="boxs" style="margin-left:130px">1</div>
+    <div class="boxs" style="margin-left: 240px;">2</div>
+    <div class="boxs villain" style="margin-left: 350px;">3</div>
+    <div class="boxs" style="margin-left: 460px;">4</div>
+    <div class="boxs" style="margin-left: 570px;">5</div>
+    <div class="boxs" style="margin-left: 680px;">6</div>
+    <div class="boxs" style="margin-left: 790px;">7</div>
+    <div class="boxs" style="margin-left: 900px;">8</div>
+    <div class="boxs" style="margin-left: 1010px;">9</div>
+    <div class="boxs" style="margin-left: 1120px;">10</div>
+    <div class="boxs" style="margin-left: 1230px;">11</div>
+    <div class="boxs" style="margin-left: 1340px;">12</div>
+
+    <div class="boxs" style="margin-left: 1340px; margin-top: 110px;">13</div>
+    <div class="boxs" style="margin-left: 1340px; margin-top: 220px;">14</div>
+    <div class="boxs" style="margin-left: 1340px; margin-top: 330px;">15</div>
+
+    <div class="boxs" style="margin-left: 1230px; margin-top: 330px;">16</div>
+    <div class="boxs" style="margin-left: 1120px; margin-top: 330px;">17</div>
+    <div class="boxs" style="margin-left: 1010px; margin-top: 330px;">18</div>
+    <div class="boxs" style="margin-left: 900px; margin-top: 330px;">19</div>
+    <div class="boxs" style="margin-left: 790px; margin-top: 330px;">20</div>
+    <div class="boxs" style="margin-left: 680px; margin-top: 330px;">21</div>
+    <div class="boxs" style="margin-left: 570px; margin-top: 330px;">22</div>
+    <div class="boxs" style="margin-left: 460px; margin-top: 330px;">23</div>
+    <div class="boxs" style="margin-left: 350px; margin-top: 330px;">24</div>
+    <div class="boxs" style="margin-left: 240px; margin-top: 330px;">25</div>
+    <div class="boxs" style="margin-left: 130px; margin-top: 330px;">26</div>
+    <div class="boxs" style="margin-left: 20px; margin-top: 330px;">27</div>
+
+    <div class="boxs" style="margin-left: 20px; margin-top: 220px;">28</div>
+    <div class="boxs" style="margin-left: 20px; margin-top: 110px;">29</div>
+</div>
+    <script type="text/javascript">
+        let cube = document.querySelector('.btn');
+        let boxs = document.querySelectorAll(".boxs");
+        let first = document.querySelector(".firstBox");
+        let content = document.querySelector(".content");
+        let steps = 0;
+        let score = 150;
+        let scores = document.querySelector(".score");
+        let scorePoints = function(points){
+            score = score + points;
+            scores.innerHTML = score;
+        }
+        cube.onclick = function(){
+            boxs[steps].style.backgroundImage = "none";
+            let randNum = Math.random() * 6;
+            let roundNum = Math.round(randNum);
+            steps = steps + roundNum;
+            alert("Иди на " + roundNum + "на клетку" + steps);
+            boxs[steps].style.backgroundImage = "url(player.png)";
+            boxs[steps].style.backgroundSize = '100% 100%';
+            if(roundNum == 0){
+                scorePoints(0);
+            }
+            if(steps == 3 || steps == 6 || steps == 9){
+                alert("Тебе не стоит к нему идти, иди на 1 клетку нащал");
+                steps = steps - 1;
+                boxs[3].style.backgroundImage = '';
+                boxs[steps].style.backgroundImage = "url(player.png)";
+                boxs[steps].style.backgroundSize = '100% 100%';
+            }
+            if(steps >= 29){
+                alert("You win!")
+                content.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
